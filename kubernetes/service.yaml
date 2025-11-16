@@ -5,7 +5,8 @@ metadata:
 spec:
   selector:
     app: flask-app
+  type: NodePort
   ports:
     - port: 5000
       targetPort: 5000
-  type: NodePort
+      nodePort: 30080      # NodePort for external access
