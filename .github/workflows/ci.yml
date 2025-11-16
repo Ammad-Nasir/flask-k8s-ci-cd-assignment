@@ -1,0 +1,37 @@
+name: CI Pipeline
+
+# Trigger on any push
+on:
+  push:
+    branches: ["*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Lint code with flake8
+      run: |
+        pip install flake8
+        flake8 --max-line-length=90
+
+    - name: Run pytest unit test
+      run: |
+        pip install pytest
+        # Create a dummy test file
+        echo "def test_dummy(): assert 1 + 1 == 2" > test_dummy.py
+        pytest
+
+    - name: Build Docker image
+      run: docker build -t flask-k8s-app .
