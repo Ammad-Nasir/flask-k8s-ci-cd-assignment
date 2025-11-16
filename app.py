@@ -1,16 +1,16 @@
-def my_function():
-    return "Hi"
-
-# Need another blank line here
-print("Hello")
-
-from flask import Flask
+from flask import Flask  # <-- all imports at the top
 
 app = Flask(__name__)
 
+
+def simple_function():
+    return "Hello World"
+
+
 @app.route("/")
 def home():
-    return "Hello, World from Flask on Kubernetes!"
+    return simple_function()
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
