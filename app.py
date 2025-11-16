@@ -1,3 +1,9 @@
+def my_function():
+    return "Hi"
+
+# Need another blank line here
+print("Hello")
+
 from flask import Flask
 
 app = Flask(__name__)
